@@ -176,7 +176,8 @@ module Padrino
         reloadable_apps.each do |app|
           app.app_obj.reload! if app.app_obj.dependencies.include?(file)
         end
-        safe_load(file)
+        # safe_load(file)
+        require file
       else
         apps.each { |app| app.app_obj.reload! }
         update_modification_time(file)
