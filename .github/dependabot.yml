@@ -1,0 +1,43 @@
+# Managed by pdm-github-config `rollout apply --module dependabot`. Edits here are overwritten.
+#
+# What this does, per package manager below: Dependabot opens ONE pull request
+# for all available security fixes, and ONE for the week's minor and patch
+# version bumps. Major bumps arrive separately and are reviewed on their own
+# merits; security fixes are NOT restricted to minor and patch, because a fix
+# that is only available in a new major is still the fix.
+#
+# Alerts and automated security fixes are enabled on this repository by
+# pdm-github-config stacks/repo-settings. Critical and high findings are fixed
+# within 30 days; see that repository's README.md, "Dependabot".
+#
+# To add a package manager or a sub-directory, set
+# repos.padrino-framework.dependabot in pdm-github-config manifest/fleet.yaml. Do not
+# edit this file in the consumer repository — the rollout overwrites it.
+
+version: 2
+
+updates:
+  - package-ecosystem: "bundler"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "bundler"
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+    groups:
+      bundler-security:
+        applies-to: security-updates
+        patterns:
+          - "*"
+      bundler-version-updates:
+        applies-to: version-updates
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
